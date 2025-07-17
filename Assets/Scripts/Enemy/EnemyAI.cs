@@ -1,13 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
 public class EnemyAI : MonoBehaviour {
     [Header("Behavior")]
     public Transform playerObject;
     public Player player;
-    public float chaseStartDistance = 20f;
-    public float killDistance = 25f;
+    public float killDistance = 1.5f;
     public float defaultMoveSpeed = 3f;
     public float chaseMoveSpeed = 20f;
     public float safeBorderDistance = 0.5f;
@@ -31,23 +29,21 @@ public class EnemyAI : MonoBehaviour {
     private bool isPlayerOutOfBounds;
     private bool isPlayerNearBorder;
 
-    private Rigidbody rigidBody;
-
     private void Start() {
-        rigidBody = GetComponent<Rigidbody>();
-        rigidBody.freezeRotation = true;
-
         GeneratePatrolPoints();
     }
 
     private void Update() {
-        CheckPlayerPosition();
-    }
+        if (player.isDead) {
+            return;
+        }
 
-    private void FixedUpdate() {
+        CheckPlayerPosition();
+
         if (isPlayerOutOfBounds) {
             chasing = true;
             currentMoveSpeed = chaseMoveSpeed;
+            TryToKillPlayer();
         } else {
             chasing = isPlayerNearBorder;
             currentMoveSpeed = defaultMoveSpeed;
@@ -60,12 +56,6 @@ public class EnemyAI : MonoBehaviour {
         }
     }
 
-    private void OnCollisionEnter(Collision collision) {
-        if (!player.isDead && collision.gameObject.CompareTag("Player") && isPlayerOutOfBounds) {
-            KillPlayer();
-        }
-    }
-
     private void CheckPlayerPosition() {
         float absX = Mathf.Abs(playerObject.position.x);
         float absZ = Mathf.Abs(playerObject.position.z);
@@ -75,6 +65,13 @@ public class EnemyAI : MonoBehaviour {
         isPlayerNearBorder =
             (absX >= areaLimit - viewDistance && absX < areaLimit) ||
             (absZ >= areaLimit - viewDistance && absZ < areaLimit);
+    }
+
+    private void TryToKillPlayer() {
+        var distanceToPlayer = Vector3.Distance(transform.position, playerObject.position);
+        if (distanceToPlayer < killDistance) {
+            KillPlayer();
+        }
     }
 
     private void KillPlayer() {
@@ -146,7 +143,7 @@ public class EnemyAI : MonoBehaviour {
     private void MoveTowards(Vector3 target) {
         var moveDirection = (target - transform.position).normalized;
         var nextPosition = transform.position + moveDirection * currentMoveSpeed * Time.fixedDeltaTime;
-        rigidBody.MovePosition(nextPosition);
+        transform.position += moveDirection * currentMoveSpeed * Time.deltaTime;    
 
         var isMoving = moveDirection != Vector3.zero;
         if (isMoving) {
