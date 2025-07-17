@@ -1012,7 +1012,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 522378595}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.26693356, y: 0, z: 0, w: 0.96371496}
+  m_LocalRotation: {x: 0.2669336, y: 0.000000014360474, z: -0.000000003977621, w: 0.96371496}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1181,7 +1181,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 607821826}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.16618013, y: 0.00000003285671, z: -0.0000000055371236, w: 0.9860954}
+  m_LocalRotation: {x: 0.16618013, y: -0.0000000060864433, z: 0.0000000010257079, w: 0.9860954}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1405,8 +1405,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerObject: {fileID: 951570843}
   player: {fileID: 951570847}
-  chaseStartDistance: 20
-  killDistance: 25
+  killDistance: 1.5
   defaultMoveSpeed: 3
   chaseMoveSpeed: 20
   safeBorderDistance: 1.5
@@ -3841,7 +3840,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1868789754}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.22185206, y: 0.000000014529832, z: -0.0000000033058538, w: 0.9750804}
+  m_LocalRotation: {x: 0.22185205, y: 0.000000014529832, z: -0.0000000033058536, w: 0.9750804}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4341,11 +4340,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6318776224757109807, guid: 54dd2216853ff154ebb7b1772e57c9d8, type: 3}
+    - {fileID: 9119586111136187365, guid: 54dd2216853ff154ebb7b1772e57c9d8, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4014205308232476498, guid: 54dd2216853ff154ebb7b1772e57c9d8, type: 3}
-      insertIndex: 1
+      insertIndex: -1
       addedObject: {fileID: 747411946}
     - targetCorrespondingSourceObject: {fileID: 4014205308232476498, guid: 54dd2216853ff154ebb7b1772e57c9d8, type: 3}
       insertIndex: -1
