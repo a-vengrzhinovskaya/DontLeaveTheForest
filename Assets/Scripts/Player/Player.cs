@@ -29,11 +29,10 @@ public class Player : MonoBehaviour {
 
     private IEnumerator SpeedBoostCoroutine(float duration, float boostStrength) {
         var movementController = GetComponent<PlayerMovement>();
-        var originalSpeed = movementController.moveSpeed;
-        movementController.moveSpeed = originalSpeed * boostStrength;
+        movementController.currentMoveSpeed = movementController.defaultMoveSpeed * boostStrength;
 
         yield return new WaitForSeconds(duration);
 
-        movementController.moveSpeed = originalSpeed;
+        movementController.currentMoveSpeed = movementController.defaultMoveSpeed;
     }
 }

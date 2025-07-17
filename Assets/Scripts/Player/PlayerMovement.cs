@@ -5,12 +5,14 @@ public class PlayerMovement : MonoBehaviour {
     public Transform playerObject;
 
     [Header("Movement")]
-    public float moveSpeed = 4;
+    public float defaultMoveSpeed = 4;
     public Transform orientation;
 
     [Header("Bounce")]
     public float bounceAmplitude = 0.15f;
     public float bounceFrequency = 6;
+
+    public float currentMoveSpeed;
 
     private Vector2 moveInput;
     private Vector3 moveDirection;
@@ -41,6 +43,8 @@ public class PlayerMovement : MonoBehaviour {
         rigidBody = GetComponent<Rigidbody>();
         rigidBody.freezeRotation = true;
 
+        currentMoveSpeed = defaultMoveSpeed;
+
         initialLocalPosition = playerObject.localPosition;
     }
 
@@ -61,13 +65,13 @@ public class PlayerMovement : MonoBehaviour {
             playerObject.rotation = Quaternion.Slerp(playerObject.rotation, targetRotation, Time.fixedDeltaTime * 10f);
         }
 
-        rigidBody.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+        rigidBody.AddForce(moveDirection.normalized * currentMoveSpeed * 10f, ForceMode.Force);
     }
 
     private void ControlSpeed() {
         var flatVelocity = new Vector3(rigidBody.velocity.x, 0f, rigidBody.velocity.z);
-        if (flatVelocity.magnitude > moveSpeed) {
-            var limitedVelocity = flatVelocity.normalized * moveSpeed;
+        if (flatVelocity.magnitude > currentMoveSpeed) {
+            var limitedVelocity = flatVelocity.normalized * currentMoveSpeed;
             rigidBody.velocity = new Vector3(limitedVelocity.x, rigidBody.velocity.y, limitedVelocity.z);
         }
     }
