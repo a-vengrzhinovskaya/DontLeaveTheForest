@@ -12,15 +12,30 @@ public class PlayerMovement : MonoBehaviour {
     public float bounceAmplitude = 0.15f;
     public float bounceFrequency = 6;
 
-    private float horizontalInput;
-    private float verticalInput;
-
+    private Vector2 moveInput;
     private Vector3 moveDirection;
 
     private Rigidbody rigidBody;
 
     private float animationTime;
     private Vector3 initialLocalPosition;
+
+    private PlayerControls controls;
+
+    private void Awake() {
+        controls = new PlayerControls();
+        controls.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
+        controls.Player.Move.canceled += _ => moveInput = Vector2.zero;
+    }
+
+    private void OnEnable() {
+        controls.Player.Enable();
+    }
+
+    private void OnDisable() {
+        controls.Player.Disable();
+    }
+
 
     private void Start() {
         rigidBody = GetComponent<Rigidbody>();
@@ -30,7 +45,6 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void Update() {
-        GetInput();
         ControlSpeed();
         Bounce();
     }
@@ -39,13 +53,14 @@ public class PlayerMovement : MonoBehaviour {
         MovePlayer();
     }
 
-    private void GetInput() {
-        horizontalInput = Input.GetAxisRaw("Horizontal");
-        verticalInput = Input.GetAxisRaw("Vertical");
-    }
-
     private void MovePlayer() {
-        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+        moveDirection = orientation.forward * moveInput.y + orientation.right * moveInput.x;
+
+        if (moveDirection.magnitude > 0.1f) {
+            var targetRotation = Quaternion.LookRotation(moveDirection.normalized);
+            playerObject.rotation = Quaternion.Slerp(playerObject.rotation, targetRotation, Time.fixedDeltaTime * 10f);
+        }
+
         rigidBody.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
     }
 
@@ -58,9 +73,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void Bounce() {
-        var isMoving = new Vector3(horizontalInput, 0f, verticalInput).magnitude > 0.1f;
-
-        if (isMoving) {
+        if (moveInput.magnitude > 0.1f) {
             animationTime += Time.deltaTime * bounceFrequency;
             var scale = 1f + Mathf.Sin(animationTime) * bounceAmplitude;
             playerObject.localScale = new Vector3(1f, scale, 1f);
