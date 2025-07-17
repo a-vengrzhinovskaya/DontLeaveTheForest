@@ -83,7 +83,7 @@ public class EnemyAI : MonoBehaviour {
     private void ChasePlayer() {
         var targetPosition = playerObject.position;
 
-        //ограничение передвижения врага, чтобы не заходил в зону игрока
+        //restrict enemy from entering player's area
         if (!isPlayerOutOfBounds) {
             var clampedX = Mathf.Clamp(playerObject.position.x, -areaLimit, areaLimit);
             var clampedZ = Mathf.Clamp(playerObject.position.z, -areaLimit, areaLimit);
@@ -101,7 +101,7 @@ public class EnemyAI : MonoBehaviour {
 
         var distanceToTarget = Vector3.Distance(transform.position, targetPosition);
 
-        if (distanceToTarget > safeBorderDistance * 0.9f) { //чтобы враг не упирался в границу зоны игрока
+        if (distanceToTarget > safeBorderDistance * 0.9f) { //stopping enemy from running into area border
             MoveTowards(targetPosition);
         } else {
             var targetDirection = (playerObject.position - transform.position).normalized;

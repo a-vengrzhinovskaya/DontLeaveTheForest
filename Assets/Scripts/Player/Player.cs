@@ -2,8 +2,6 @@ using System.Collections;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
-    [Header("Game Manager")]
-
     [Header("Behavior")]
     public int maxHealth = 3;
 
