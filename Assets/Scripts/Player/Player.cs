@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
@@ -20,5 +21,19 @@ public class Player : MonoBehaviour {
             isDead = true;
             GameManager.instance.GameOver();
         }
+    }
+
+    public void getSpeedBoost(float duration, float boostStrength) {
+        StartCoroutine(SpeedBoostCoroutine(duration, boostStrength));
+    }
+
+    private IEnumerator SpeedBoostCoroutine(float duration, float boostStrength) {
+        var movementController = GetComponent<PlayerMovement>();
+        var originalSpeed = movementController.moveSpeed;
+        movementController.moveSpeed = originalSpeed * boostStrength;
+
+        yield return new WaitForSeconds(duration);
+
+        movementController.moveSpeed = originalSpeed;
     }
 }

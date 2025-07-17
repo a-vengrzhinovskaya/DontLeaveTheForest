@@ -4,7 +4,12 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour {
     public static GameManager instance;
 
+    [Header("Game Over")]
     public GameObject gameOverUI;
+
+    [Header("Notes")]
+    public GameObject noteUI;
+    public TMPro.TextMeshProUGUI noteText;
 
     private void Start() {
         Cursor.lockState = CursorLockMode.Locked;
@@ -12,6 +17,7 @@ public class GameManager : MonoBehaviour {
     }
 
     public void GameOver() {
+        noteUI.SetActive(false);
         gameOverUI.SetActive(true);
         Time.timeScale = 0f;
         UnlockCursor();
@@ -28,6 +34,17 @@ public class GameManager : MonoBehaviour {
         } else {
             Destroy(gameObject);
         }
+    }
+
+    public void ShowNote(string message) {
+        UnlockCursor();
+        noteUI.SetActive(true);
+        noteText.text = message;
+    }
+
+    public void HideNote() {
+        LockCursor();
+        noteUI.SetActive(false);
     }
 
     private void LockCursor() {
