@@ -12,15 +12,14 @@ public class GameManager : MonoBehaviour {
     public TMPro.TextMeshProUGUI noteText;
 
     private void Start() {
-        Cursor.lockState = CursorLockMode.Locked;
-        LockCursor();
+        //LockCursor();
     }
 
     public void GameOver() {
         noteUI.SetActive(false);
         gameOverUI.SetActive(true);
         Time.timeScale = 0f;
-        UnlockCursor();
+        //UnlockCursor();
     }
 
     public void RestartGame() {
@@ -37,13 +36,13 @@ public class GameManager : MonoBehaviour {
     }
 
     public void ShowNote(string message) {
-        UnlockCursor();
+        //UnlockCursor();
         noteUI.SetActive(true);
         noteText.text = message;
     }
 
     public void HideNote() {
-        LockCursor();
+        //LockCursor();
         noteUI.SetActive(false);
     }
 
