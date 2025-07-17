@@ -6,6 +6,6 @@ public class Bonus : Item {
 
     protected override void TakeEffect() {
         ItemLogger.instance.AddEntry(itemName);
-        player.getSpeedBoost(duration, effectStrength);
+        player.receiveBoost(duration, effectStrength);
     }
 }

@@ -26,7 +26,7 @@ public class ItemSpawner : MonoBehaviour {
     void SpawnNotes() {
         for (int noteNumber = 0; noteNumber < Mathf.Min(noteCount, noteTexts.Count); ++noteNumber) {
             var position = GetValidPosition();
-            var note = Instantiate(notePrefab, position, notePrefab.transform.rotation); //записка должна лежать на земле
+            var note = Instantiate(notePrefab, position, notePrefab.transform.rotation); //note must be on ground
 
             var noteScript = note.GetComponent<Note>();
             noteScript.text = noteTexts[noteNumber];
@@ -46,7 +46,7 @@ public class ItemSpawner : MonoBehaviour {
             var half = spawnAreaSize / 2f;
             var possibleSpawnPosition = new Vector3(
                 Random.Range(-half, half),
-                0.03f, //чтобы не клипались через землю
+                0.03f, //to prevent clipping
                 Random.Range(-half, half)
             );
 
@@ -56,7 +56,6 @@ public class ItemSpawner : MonoBehaviour {
             }
         }
 
-        Debug.LogWarning("Место не найдено");
         return Vector3.zero;
     }
 

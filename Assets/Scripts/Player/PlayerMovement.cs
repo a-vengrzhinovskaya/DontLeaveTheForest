@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour {
     public float bounceAmplitude = 0.15f;
     public float bounceFrequency = 6;
 
-    public float currentMoveSpeed;
+    private float currentMoveSpeed;
 
     private Vector2 moveInput;
     private Vector3 moveDirection;
@@ -55,6 +55,10 @@ public class PlayerMovement : MonoBehaviour {
 
     private void FixedUpdate() {
         MovePlayer();
+    }
+
+    public void changeMoveSpeed(float newMoveSpeed) {
+        currentMoveSpeed = newMoveSpeed;
     }
 
     private void MovePlayer() {

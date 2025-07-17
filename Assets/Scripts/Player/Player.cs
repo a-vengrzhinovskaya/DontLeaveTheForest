@@ -5,7 +5,7 @@ public class Player : MonoBehaviour {
     [Header("Behavior")]
     public int maxHealth = 3;
 
-    public bool isDead { get; private set; }
+    public bool IsDead { get; private set; }
 
     public int CurrentHealth {  get; private set; }
 
@@ -16,21 +16,21 @@ public class Player : MonoBehaviour {
     public void takeDamage(int incomingDamage) {
         CurrentHealth -= incomingDamage;
         if (CurrentHealth <= 0) {
-            isDead = true;
+            IsDead = true;
             GameManager.instance.GameOver();
         }
     }
 
-    public void getSpeedBoost(float duration, float boostStrength) {
-        StartCoroutine(SpeedBoostCoroutine(duration, boostStrength));
+    public void receiveBoost(float duration, float boostStrength) {
+        StartCoroutine(launchSpeedBoostCoroutine(duration, boostStrength));
     }
 
-    private IEnumerator SpeedBoostCoroutine(float duration, float boostStrength) {
+    private IEnumerator launchSpeedBoostCoroutine(float duration, float boostStrength) {
         var movementController = GetComponent<PlayerMovement>();
-        movementController.currentMoveSpeed = movementController.defaultMoveSpeed * boostStrength;
+        movementController.changeMoveSpeed(movementController.defaultMoveSpeed * boostStrength);
 
         yield return new WaitForSeconds(duration);
 
-        movementController.currentMoveSpeed = movementController.defaultMoveSpeed;
+        movementController.changeMoveSpeed(movementController.defaultMoveSpeed);
     }
 }

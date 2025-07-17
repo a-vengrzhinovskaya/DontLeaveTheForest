@@ -34,7 +34,7 @@ public class EnemyAI : MonoBehaviour {
     }
 
     private void Update() {
-        if (player.isDead) {
+        if (player.IsDead) {
             return;
         }
 
