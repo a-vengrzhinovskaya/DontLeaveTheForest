@@ -1,7 +1,8 @@
 public class Bonus : Item {
-    public Bonus(Player _player) : base(_player) {}
+    public float duration = 3f;
+    public float effectStrength = 1.5f;
 
     protected override void TakeEffect() {
-        //TODO: player move speed boost [3-5 sec]
+        player.getSpeedBoost(duration, effectStrength);
     }
 }

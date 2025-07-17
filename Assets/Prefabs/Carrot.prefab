@@ -193,8 +193,8 @@ Transform:
   m_GameObject: {fileID: 5701395644474320866}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.06183, z: 0}
-  m_LocalScale: {x: 0.204231, y: 0.08204977, z: 0.204231}
+  m_LocalPosition: {x: 0, y: -0.05191, z: 0}
+  m_LocalScale: {x: 0.204231, y: 0.101885304, z: 0.204231}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 527713327724428440}
@@ -293,6 +293,7 @@ GameObject:
   m_Component:
   - component: {fileID: 527713327724428440}
   - component: {fileID: 8942942398591010919}
+  - component: {fileID: -4187966591777296916}
   m_Layer: 0
   m_Name: Carrot
   m_TagString: Untagged
@@ -333,12 +334,26 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.22, y: 0.3, z: 0.22}
   m_Center: {x: 0, y: 0.06, z: 0}
+--- !u!114 &-4187966591777296916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6483235089078059200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b5dcbfc0e8eb6c48be567d175341a11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 3
+  effectStrength: 1.5
 --- !u!1 &7474928442571788137
 GameObject:
   m_ObjectHideFlags: 0

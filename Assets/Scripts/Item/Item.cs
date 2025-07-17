@@ -1,29 +1,17 @@
 using UnityEngine;
 
 public abstract class Item : MonoBehaviour {
-    public Player player;
-
-    protected Item(Player _player) {
-        this.player = _player;
-    }
+    protected Player player;
 
     void Start() {
-        Spawn();
+        player = FindObjectOfType<Player>();
     }
 
     private void OnTriggerEnter(Collider other) {
         if (other.gameObject.CompareTag("Player")) {
             TakeEffect();
-            Despawn();
+            Destroy(gameObject);
         }
-    }
-
-    private void Spawn() {
-
-    }
-
-    private void Despawn() {
-
     }
 
     protected abstract void TakeEffect();

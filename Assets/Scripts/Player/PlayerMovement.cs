@@ -5,12 +5,12 @@ public class PlayerMovement : MonoBehaviour {
     public Transform playerObject;
 
     [Header("Movement")]
-    public float moveSpeed;
+    public float moveSpeed = 4;
     public Transform orientation;
 
     [Header("Bounce")]
-    public float bounceAmplitude;
-    public float bounceFrequency;
+    public float bounceAmplitude = 0.15f;
+    public float bounceFrequency = 6;
 
     private float horizontalInput;
     private float verticalInput;

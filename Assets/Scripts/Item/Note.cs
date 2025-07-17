@@ -1,7 +1,7 @@
 public class Note : Item {
-    public Note(Player _player) : base(_player){}
+    public string text;
 
     protected override void TakeEffect() {
-        //TODO: note screen
+        GameManager.instance.ShowNote(text);
     }
 }
