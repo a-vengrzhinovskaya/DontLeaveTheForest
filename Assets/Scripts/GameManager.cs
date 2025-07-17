@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour {
         noteUI.SetActive(false);
         gameOverUI.SetActive(true);
         Time.timeScale = 0f;
+
+        ItemLogger.instance.SaveCurrentLog();
         //UnlockCursor();
     }
 
@@ -33,6 +35,10 @@ public class GameManager : MonoBehaviour {
         } else {
             Destroy(gameObject);
         }
+    }
+
+    private void OnApplicationQuit() {
+        ItemLogger.instance.SaveCurrentLog();
     }
 
     public void ShowNote(string message) {

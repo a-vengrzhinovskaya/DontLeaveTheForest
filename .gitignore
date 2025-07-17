@@ -85,6 +85,9 @@ Assets/TextMesh Pro/
 !Assets/Scripts/
 !Assets/Sprites/
 
+Packages
+ProjectSettings
+
 .gitattributes
 .vsconfig
 
